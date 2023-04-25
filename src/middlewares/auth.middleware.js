@@ -2,20 +2,20 @@ const { ExtractJwt, Strategy } = require('passport-jwt')
 const passport = require('passport')
 
 const { findUserById } = require('../users/users.controllers')
-const config = require('../../config').api
-
+ const {secretOrKey}= require('../../config').api
 const passportConfigs = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), //? 
-    secretOrKey: config.secretOrKey
-}
+    secretOrKey: secretOrKey
+} 
 
-passport.use(new Strategy(passportConfigs, (tokenDecoded, done) => {
+
+ passport.use(new Strategy(passportConfigs, (tokenDecoded, done) => {
     findUserById(tokenDecoded.id)
         .then(data => {
-            if (data) {
-                done(null, tokenDecoded) //? El usuario si Existe y es valido
+            if(data){
+               done(null, tokenDecoded) //? El usuario si Existe y es valido
             } else {
-                done(null, false, { message: 'Token Incorrect' }) //? El usuario no existe
+               done(null, false, {message: 'Token Incorrect'}) //? El usuario no existe
             }
         })
         .catch(err => {
@@ -23,4 +23,4 @@ passport.use(new Strategy(passportConfigs, (tokenDecoded, done) => {
         })
 }))
 
-module.exports = passport.authenticate('jwt', { session: false })
+module.exports = passport.authenticate('jwt', {session: false})
