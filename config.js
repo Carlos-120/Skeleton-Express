@@ -4,7 +4,7 @@ const configs = {
         port: process.env.PORT || 3000,
         host: process.env.HOST || 'http://localhost:3000',
         nodeEnv: process.env.NODE_ENV || 'development',
-        secretOrKey : process.env.JWT_SECET,
+        secretOrKey : process.env.JWT_SECRET,
     },
     db: {
         development: {
@@ -14,7 +14,7 @@ const configs = {
             port: 5432, 
             username: 'postgres',
             password: '220122',
-            database: 'academovies',
+            database: 'skeleton',
             define: {
                 timestamps: true, //? Nos obliga a que todas las tablas tengan la propiedad createdAt y upadtedAt
                 underscored: true,
@@ -47,7 +47,7 @@ const configs = {
             host: 'localhost',
             port: 5432,
             username: 'postgres',
-            password: 'root',
+            password: '220122',
             database: 'chat-db',
             define: {
                 timestamps: true, //? Nos obliga a que todas las tablas tengan la propiedad createdAt y upadtedAt
